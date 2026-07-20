@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ҳисобдории Бозор - Маблағҳо</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121214;
+            margin: 0;
+            padding: 15px;
+            color: #e1e1e6;
+            padding-bottom: 80px;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #00e676;
+            text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #1e1e24;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border: 1px solid #2d2d35;
+        }
+
+        .balance-box {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #252529;
+            border-radius: 10px;
+            border: 1px solid #00e676;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
+        }
+
+        .neon-green {
+            color: #00e676 !important;
+            text-shadow: 0 0 8px rgba(0, 230, 118, 0.4);
+        }
+
+        .neon-red {
+            color: #ff3d71 !important;
+            text-shadow: 0 0 8px rgba(255, 61, 113, 0.4);
+        }
+
+        .neon-orange {
+            color: #ff9f43 !important;
+            text-shadow: 0 0 8px rgba(255, 159, 67, 0.4);
+        }
+
+        .neon-blue {
+            color: #00d2ff !important;
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #a4a4b5;
+            font-size: 14px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #2d2d35;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #252529;
+            color: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00e676;
+            box-shadow: 0 0 5px rgba(0, 230, 118, 0.3);
+        }
+
+        button.add-btn {
+            background-color: #00e676;
+            color: #121214;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.3);
+            transition: 0.2s;
+        }
+
+        button.add-btn:active {
+            background-color: #00b359;
+            transform: scale(0.98);
+        }
+
+        .history-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .history-item {
+            background: #252529;
+            padding: 12px;
+            border: 1px solid #2d2d35;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-desc {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .item-date {
+            font-size: 11px;
+            color: #71717a;
+            margin-top: 4px;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ff3d71;
+            cursor: pointer;
+            font-size: 16px;
+            width: auto;
+            padding: 0 5px;
+            margin: 0;
+        }
+
+        /* Ҳамон панель */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1e1e24;
+            border-top: 1px solid #2d2d35;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #a4a4b5;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            transition: 0.3s;
+            border-radius: 10px;
+            margin: 0 5px;
+        }
+
+        .nav-btn.active {
+            color: #00e676;
+            background: rgba(0, 230, 118, 0.1);
+            box-shadow: 0 0 10px rgba(0, 230, 118, 0.2);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>💰 Маблағҳо</h2>
+    
+    <div class="balance-box">
+        Баланс: <span id="total-balance" class="neon-green">0</span> ТJS
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Маблағ (сомонӣ):</label>
+        <input type="number" id="amount" placeholder="Масалан: 150">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Шарҳ (заметка):</label>
+        <input type="text" id="description" placeholder="Масалан: Бор фурӯхтам ё Қарзи Аҳмад">
+    </div>
+
+    <div class="form-group">
+        <label for="type">Навъи амалиёт:</label>
+        <select id="type">
+            <option value="income">Даромад (+ Сабзи Неон)</option>
+            <option value="expense">Хароҷот (- Сурхи Неон)</option>
+            <option value="debt-to-give">Қарздор шудам (Бояд диҳам - Зард)</option>
+            <option value="debt-to-take">Қарз доданд (Бояд гирам - Кӯк)</option>
+        </select>
+    </div>
+
+    <button class="add-btn" onclick="addTransaction()">Қайд кардан</button>
+
+    <h3>Таърихи қайдҳо</h3>
+    <ul id="history-list" class="history-list"></ul>
+</div>
+
+<!-- Ҳамон панель -->
+<div class="bottom-nav">
+    <button class="nav-btn active" onclick="goToFinance()">💰 Маблағҳо</button>
+    <button class="nav-btn" onclick="goToInventory()">📦 Товорҳо</button>
+    <button class="nav-btn" onclick="logout()">🚪 Баромад</button>
+</div>
+
+<script>
+    // Санҷиши аутентификация
+    if (sessionStorage.getItem('authenticated') !== 'true') {
+        window.location.href = '../index.html';
+    }
+
+    let transactions = JSON.parse(localStorage.getItem('market_transactions')) || [];
+
+    function updateUI() {
+        const list = document.getElementById('history-list');
+        const balanceEl = document.getElementById('total-balance');
+        
+        list.innerHTML = '';
+        let total = 0;
+
+        transactions.forEach((item, index) => {
+            let colorClass = '';
+            let prefix = '';
+
+            if (item.type === 'income') {
+                colorClass = 'neon-green';
+                prefix = '+';
+                total += Number(item.amount);
+            } else if (item.type === 'expense') {
+                colorClass = 'neon-red';
+                prefix = '-';
+                total -= Number(item.amount);
+            } else if (item.type === 'debt-to-give') {
+                colorClass = 'neon-orange';
+                prefix = 'Қарздор: ';
+            } else if (item.type === 'debt-to-take') {
+                colorClass = 'neon-blue';
+                prefix = 'Гиранда: ';
+            }
+
+            const li = document.createElement('li');
+            li.className = 'history-item';
+            li.innerHTML = `
+                <div class="item-info">
+                    <span class="item-desc">${item.description}</span>
+                    <span class="item-date">${item.date}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="${colorClass}" style="font-weight: bold;">${prefix}${item.amount} сомонӣ</span>
+                    <button class="delete-btn" onclick="deleteTransaction(${index})">✕</button>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+
+        balanceEl.innerText = total;
+        if (total >= 0) {
+            balanceEl.className = 'neon-green';
+        } else {
+            balanceEl.className = 'neon-red';
+        }
+    }
+
+    function addTransaction() {
+        const amountInput = document.getElementById('amount');
+        const descInput = document.getElementById('description');
+        const typeInput = document.getElementById('type');
+
+        if (amountInput.value === '' || descInput.value === '') {
+            alert('Лутфан маблағ ва шарҳро нависед!');
+            return;
+        }
+
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('tg-TJ') + ' ' + now.toLocaleTimeString('tg-TJ', {hour: '2-digit', minute:'2-digit'});
+
+        const newTransaction = {
+            amount: amountInput.value,
+            description: descInput.value,
+            type: typeInput.value,
+            date: dateStr
+        };
+
+        transactions.unshift(newTransaction);
+        localStorage.setItem('market_transactions', JSON.stringify(transactions));
+        
+        amountInput.value = '';
+        descInput.value = '';
+        
+        updateUI();
+    }
+
+    function deleteTransaction(index) {
+        transactions.splice(index, 1);
+        localStorage.setItem('market_transactions', JSON.stringify(transactions));
+        updateUI();
+    }
+
+    function goToFinance() {
+        window.location.href = 'finance.html';
+    }
+
+    function goToInventory() {
+        window.location.href = 'inventory.html';
+    }
+
+    function logout() {
+        sessionStorage.removeItem('authenticated');
+        window.location.href = '../index.html';
+    }
+
+    updateUI();
+</script>
+
+</body>
+</html>
