@@ -3,141 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ҳисобдории Бозор - Воход</title>
+    <title>Дафтари Бозор</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* Заминаи торик ва танзимоти умумӣ */
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #121214 0%, #1e1e24 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #121214;
+            margin: 0;
+            padding: 0;
             color: #e1e1e6;
+            padding-bottom: 70px; /* Барои менюи поёнӣ ҷой мемонем */
         }
-
-        .login-container {
-            background: #1e1e24;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 1px solid #2d2d35;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .login-header {
+        h2, h3 {
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-header h1 {
             color: #00e676;
-            font-size: 28px;
             text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
-            margin-bottom: 10px;
+            margin-top: 15px;
         }
-
-        .login-header p {
-            color: #a4a4b5;
-            font-size: 14px;
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
         }
+        .card {
+            background: #1e1e24;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border: 1px solid #2d2d35;
+        }
+        
+        /* Рангҳои неонӣ */
+        .neon-green { color: #00e676 !important; text-shadow: 0 0 8px rgba(0, 230, 118, 0.4); }
+        .neon-red { color: #ff3d71 !important; text-shadow: 0 0 8px rgba(255, 61, 113, 0.4); }
+        .neon-orange { color: #ff9f43 !important; text-shadow: 0 0 8px rgba(255, 159, 67, 0.4); }
+        .neon-blue { color: #00d2ff !important; text-shadow: 0 0 8px rgba(0, 210, 255, 0.4); }
 
-        .form-group {
+        /* Баланси умумӣ */
+        .balance-box {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
             margin-bottom: 20px;
+            padding: 15px;
+            background: #252529;
+            border-radius: 10px;
+            border: 1px solid #00e676;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #a4a4b5;
-            font-size: 14px;
-        }
-
-        input {
+        /* Элементҳои форма */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #a4a4b5; font-size: 14px; }
+        input, select, button {
             width: 100%;
             padding: 12px;
+            margin-top: 5px;
             border: 1px solid #2d2d35;
             border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
             background-color: #252529;
             color: white;
-            font-size: 16px;
-            transition: 0.3s;
         }
-
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #00e676;
-            box-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+            box-shadow: 0 0 5px rgba(0, 230, 118, 0.3);
         }
-
-        button {
-            width: 100%;
-            padding: 12px;
+        .main-btn {
             background-color: #00e676;
             color: #121214;
             border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: #00b359;
-            box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        .error {
-            color: #ff3d71;
-            text-align: center;
+            font-weight: bold;
             margin-top: 10px;
-            font-size: 14px;
-            text-shadow: 0 0 5px rgba(255, 61, 113, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.3);
+        }
+
+        /* Менюи поёнӣ (Нижняя навигация) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #1e1e24;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #2d2d35;
+            z-index: 1000;
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            color: #a4a4b5;
+            font-size: 24px;
+            cursor: pointer;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-item.active {
+            color: #00e676;
+            border-bottom: 3px solid #00e676;
+        }
+
+        /* Саҳифаҳо */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Рӯйхат */
+        .history-list { list-style-type: none; padding: 0; margin-top: 15px; }
+        .history-item {
+            background: #252529;
+            padding: 12px;
+            border: 1px solid #2d2d35;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .item-info { display: flex; flex-direction: column; }
+        .item-desc { font-size: 16px; font-weight: bold; }
+        .item-date { font-size: 11px; color: #71717a; margin-top: 4px; }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ff3d71;
+            cursor: pointer;
+            font-size: 18px;
+            width: auto;
+            padding: 0 5px;
+            margin: 0;
         }
     </style>
 </head>
 <body>
 
-<div class="login-container">
-    <div class="login-header">
-        <h1>🔐 Ҳисобдории Бозор</h1>
-        <p>Лутфан паролро ворид намоед</p>
+<div class="container">
+    
+    <!-- САҲИФАИ 1: Танҳо илова кардан (💰) -->
+    <div id="page-add" class="page active">
+        <h2>Қайди Нав</h2>
+        <div class="card">
+            <div class="form-group">
+                <label for="amount">Маблағ (сомонӣ):</label>
+                <input type="number" id="amount" placeholder="Масалан: 150">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Шарҳ (заметка):</label>
+                <input type="text" id="description" placeholder="Масалан: Бор фурӯхтам ё Қарзи Аҳмад">
+            </div>
+
+            <div class="form-group">
+                <label for="type">Навъи амалиёт:</label>
+                <select id="type">
+                    <option value="income">Даромад (+ Сабз)</option>
+                    <option value="expense">Хароҷот (- Сурх)</option>
+                    <option value="debt-to-give">Қарздор шудам (Бояд диҳам - Зард)</option>
+                    <option value="debt-to-take">Қарз доданд (Бояд гирам - Кӯк)</option>
+                </select>
+            </div>
+
+            <button class="main-btn" onclick="addTransaction()">Қайд кардан</button>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="password">Пароль:</label>
-        <input type="password" id="password" placeholder="Паролро ворид намоед" onkeypress="if(event.key==='Enter') login()">
+    <!-- САҲИФАИ 2: Парол ва Рӯйхат (📋) -->
+    <div id="page-list" class="page">
+        <!-- Блоки ворид кардани парол -->
+        <div id="pass-block" class="card">
+            <h2>Муҳофизат</h2>
+            <p style="text-align: center; color: #a4a4b5;">Барои дидани ҳисобҳо паролро занед:</p>
+            <div class="form-group">
+                <input type="password" id="pass-input" placeholder="Паролро нависед...">
+            </div>
+            <button class="main-btn" onclick="checkPassword()">Даромадан</button>
+        </div>
+
+        <!-- Блоки рӯйхат (пас аз пароли дуруст нишон дода мешавад) -->
+        <div id="content-block" style="display: none;">
+            <!-- Баланси умумӣ танҳо дар ин ҷост -->
+            <div class="balance-box">
+                Баланс: <span id="total-balance" class="neon-green">0</span> ТJS
+            </div>
+
+            <h3>Таърихи қайдҳо</h3>
+            <ul id="history-list" class="history-list"></ul>
+        </div>
     </div>
 
-    <button onclick="login()">Воход</button>
+</div>
 
-    <div id="error" class="error"></div>
+<!-- Менюи Поёнӣ -->
+<div class="bottom-nav">
+    <button id="btn-tab-add" class="nav-item active" onclick="switchTab('add')">💰</button>
+    <button id="btn-tab-list" class="nav-item" onclick="switchTab('list')">📋</button>
 </div>
 
 <script>
-    function login() {
-        const password = document.getElementById('password').value;
-        const correctPassword = 'azizzoda2010';
+    let transactions = JSON.parse(localStorage.getItem('market_transactions')) || [];
+    let isUnlocked = false; // Ҳолати парол
 
-        if (password === correctPassword) {
-            sessionStorage.setItem('authenticated', 'true');
-            window.location.href = 'pages/finance.html';
-        } else {
-            document.getElementById('error').innerText = 'Пароль нодуруст! 😢';
-            document.getElementById('password').value = '';
+    // Гузариш байни саҳифаҳо
+    function switchTab(tab) {
+        document.getElementById('page-add').classList.remove('active');
+        document.getElementById('page-list').classList.remove('active');
+        document.getElementById('btn-tab-add').classList.remove('active');
+        document.getElementById('btn-tab-list').classList.remove('active');
+
+        if (tab === 'add') {
+            document.getElementById('page-add').classList.add('active');
+            document.getElementById('btn-tab-add').classList.add('active');
+        } else if (tab === 'list') {
+            document.getElementById('page-list').classList.add('active');
+            document.getElementById('btn-tab-list').classList.add('active');
         }
+    }
+
+    // Санҷиши парол (ВАЛИҶОН2010)
+    function checkPassword() {
+        const input = document.getElementById('pass-input').value;
+        if (input === "ВАЛИҶОН2010") {
+            isUnlocked = true;
+            document.getElementById('pass-block').style.display = 'none';
+            document.getElementById('content-block').style.display = 'block';
+            document.getElementById('pass-input').value = '';
+            updateUI();
+        } else {
+            alert("Парол хато аст!");
+        }
+    }
+
+    // Илова кардани амалиёти нав (Саҳифаи 1)
+    function addTransaction() {
+        const amountInput = document.getElementById('amount');
+        const descInput = document.getElementById('description');
+        const typeInput = document.getElementById('type');
+
+        if (amountInput.value === '' || descInput.value === '') {
+            alert('Лутфан маблағ ва шарҳро нависед!');
+            return;
+        }
+
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('tg-TJ') + ' ' + now.toLocaleTimeString('tg-TJ', {hour: '2-digit', minute:'2-digit'});
+
+        const newTransaction = {
+            amount: amountInput.value,
+            description: descInput.value,
+            type: typeInput.value,
+            date: dateStr
+        };
+
+        transactions.unshift(newTransaction);
+        localStorage.setItem('market_transactions', JSON.stringify(transactions));
+
+        amountInput.value = '';
+        descInput.value = '';
+
+        alert('Қайд шуд! 👍');
+        if (isUnlocked) updateUI();
+    }
+
+    // Навсозии рӯйхат ва баланс (Саҳифаи 2)
+    function updateUI() {
+        if (!isUnlocked) return;
+
+        const list = document.getElementById('history-list');
+        const balanceEl = document.getElementById('total-balance');
+        
+        list.innerHTML = '';
+        let total = 0;
+
+        transactions.forEach((item, index) => {
+            let colorClass = '';
+            let prefix = '';
+
+            if (item.type === 'income') {
+                colorClass = 'neon-green';
+                prefix = '+';
+                total += Number(item.amount);
+            } else if (item.type === 'expense') {
+                colorClass = 'neon-red';
+                prefix = '-';
+                total -= Number(item.amount);
+            } else if (item.type === 'debt-to-give') {
+                colorClass = 'neon-orange';
+                prefix = 'Қарздор: ';
+            } else if (item.type === 'debt-to-take') {
+                colorClass = 'neon-blue';
+                prefix = 'Гиранда: ';
+            }
+
+            const li = document.createElement('li');
+            li.className = 'history-item';
+            li.innerHTML = `
+                <div class="item-info">
+                    <span class="item-desc">${item.description}</span>
+                    <span class="item-date">${item.date}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="${colorClass}" style="font-weight: bold;">${prefix}${item.amount} с.</span>
+                    <button class="delete-btn" onclick="deleteTransaction(${index})">✕</button>
+                </div>
+            `;
+            list.appendChild(li);
+        });
+
+        balanceEl.innerText = total;
+        if (total >= 0) {
+            balanceEl.className = 'neon-green';
+        } else {
+            balanceEl.className = 'neon-red';
+        }
+    }
+
+    // Нест кардани қайд
+    function deleteTransaction(index) {
+        if (confirm("Ин қайдро нест мекунед?")) {
+            transactions.splice(index, 1);
+            localStorage.setItem('market_transactions', JSON.stringify(transactions));
+            updateUI();
+        }
+    }
+
+    // Регистратсияи Service Worker барои кори офлайн
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Офлайн омода аст!'))
+                .catch(err => console.log('Хатогӣ:', err));
+        });
     }
 </script>
 
