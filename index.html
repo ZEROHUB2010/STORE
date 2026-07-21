@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Дафтари Бозор</title>
-  <!-- Иконка барои браузер ва телефони ту -->
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-<meta property="og:image" content="icon.png">
   <meta name="theme-color" content="#121214">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <link rel="icon" type="image/png" href="icon.png?v=3">
+  <link rel="apple-touch-icon" href="icon.png?v=3">
+  <link rel="manifest" href="manifest.json">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +19,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -34,31 +33,27 @@
       overflow: hidden;
     }
 
-    /* Header */
     .header {
-      padding: 20px 20px 12px 20px;
+      padding: 16px 20px 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #121214;
     }
 
     .header-title h1 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       color: #FFFFFF;
-      letter-spacing: -0.3px;
     }
 
     .header-title p {
-      font-size: 12px;
+      font-size: 11px;
       color: #8E8E93;
-      margin-top: 2px;
     }
 
     .badge-avatar {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: #2C2C2E;
       display: flex;
@@ -70,35 +65,26 @@
       border: 1px solid #3A3A3C;
     }
 
-    /* Main Container */
     .content {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 20px 20px 20px;
+      padding: 10px 16px 20px 16px;
     }
 
     .tab-content {
       display: none;
-      animation: fadeIn 0.25s ease-in-out;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Card Component */
     .card {
       background: #1E1E24;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
       border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     }
 
     .label {
@@ -111,22 +97,19 @@
       display: block;
     }
 
-    /* Inputs */
     .input-box {
       width: 100%;
       background: #141418;
       border: 1px solid #2C2C2E;
       border-radius: 12px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       color: #FFFFFF;
-      font-size: 16px;
+      font-size: 15px;
       outline: none;
-      transition: all 0.2s;
     }
 
     .input-box:focus {
       border-color: #00E676;
-      box-shadow: 0 0 10px rgba(0, 230, 118, 0.15);
     }
 
     .amount-input-wrapper {
@@ -137,258 +120,125 @@
 
     .currency-symbol {
       position: absolute;
-      left: 16px;
-      font-size: 18px;
+      left: 14px;
+      font-size: 16px;
       font-weight: 700;
       color: #8E8E93;
     }
 
     .amount-input {
       padding-left: 55px;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
-      color: #FFFFFF;
     }
 
-    /* Types Grid */
     .types-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 6px;
+      gap: 10px;
     }
 
     .type-btn {
       background: #141418;
       border: 1.5px solid #2C2C2E;
-      border-radius: 14px;
-      padding: 14px 10px;
+      border-radius: 12px;
+      padding: 12px 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      gap: 4px;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    .type-btn span.icon {
-      font-size: 18px;
-    }
-
-    .type-btn span.text {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    /* Neon Accents for Types */
+    .type-btn span.text { font-size: 12px; font-weight: 700; }
     .type-btn[data-type="income"] span.text { color: #00E676; }
-    .type-btn[data-type="income"].active {
-      border-color: #00E676;
-      background: rgba(0, 230, 118, 0.08);
-      box-shadow: 0 0 14px rgba(0, 230, 118, 0.25);
-    }
-
     .type-btn[data-type="expense"] span.text { color: #FF3D71; }
-    .type-btn[data-type="expense"].active {
-      border-color: #FF3D71;
-      background: rgba(255, 61, 113, 0.08);
-      box-shadow: 0 0 14px rgba(255, 61, 113, 0.25);
-    }
-
     .type-btn[data-type="debt_my"] span.text { color: #FF9F43; }
-    .type-btn[data-type="debt_my"].active {
-      border-color: #FF9F43;
-      background: rgba(255, 159, 67, 0.08);
-      box-shadow: 0 0 14px rgba(255, 159, 67, 0.25);
-    }
-
     .type-btn[data-type="debt_to_me"] span.text { color: #00D2FF; }
-    .type-btn[data-type="debt_to_me"].active {
-      border-color: #00D2FF;
-      background: rgba(0, 210, 255, 0.08);
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.25);
-    }
 
-    /* Submit Button */
+    .type-btn.active[data-type="income"] { border-color: #00E676; background: rgba(0,230,118,0.1); }
+    .type-btn.active[data-type="expense"] { border-color: #FF3D71; background: rgba(255,61,113,0.1); }
+    .type-btn.active[data-type="debt_my"] { border-color: #FF9F43; background: rgba(255,159,67,0.1); }
+    .type-btn.active[data-type="debt_to_me"] { border-color: #00D2FF; background: rgba(0,210,255,0.1); }
+
     .btn-submit {
       width: 100%;
       background: #FFFFFF;
       color: #121214;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       border: none;
-      border-radius: 14px;
-      padding: 16px;
-      margin-top: 8px;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 6px;
       cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
     }
 
-    .btn-submit:active {
-      transform: scale(0.98);
-      opacity: 0.9;
-    }
+    .btn-submit:active { opacity: 0.8; }
 
-    /* Password Gate */
-    .lock-screen {
-      text-align: center;
-      padding: 30px 10px;
-    }
+    .lock-screen { text-align: center; padding: 24px 10px; }
+    .lock-icon { font-size: 40px; margin-bottom: 8px; }
 
-    .lock-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-
-    .lock-screen h2 {
-      font-size: 18px;
-      margin-bottom: 6px;
-      color: #FFFFFF;
-    }
-
-    .lock-screen p {
-      font-size: 13px;
-      color: #8E8E93;
-      margin-bottom: 20px;
-    }
-
-    /* Total Balance Box */
     .balance-card {
-      background: linear-gradient(135deg, #1E1E24 0%, #2A2A32 100%);
-      border-radius: 20px;
-      padding: 20px;
+      background: #1E1E24;
+      border-radius: 16px;
+      padding: 16px;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .balance-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: #8E8E93;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+    .balance-title { font-size: 11px; color: #8E8E93; text-transform: uppercase; }
+    .balance-amount { font-size: 26px; font-weight: 800; color: #00E676; margin-top: 4px; }
 
-    .balance-amount {
-      font-size: 30px;
-      font-weight: 800;
-      color: #00E676;
-      margin-top: 6px;
-    }
-
-    /* Records List */
     .record-item {
       background: #1E1E24;
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.03);
     }
 
-    .record-info .desc {
-      font-size: 15px;
-      font-weight: 600;
-      color: #FFFFFF;
-    }
-
-    .record-info .date {
-      font-size: 11px;
-      color: #8E8E93;
-      margin-top: 3px;
-    }
-
-    .record-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .record-amount {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
+    .record-info .desc { font-size: 14px; font-weight: 600; color: #FFFFFF; }
+    .record-info .date { font-size: 10px; color: #8E8E93; margin-top: 2px; }
+    .record-amount { font-size: 15px; font-weight: 700; }
     .record-amount.income { color: #00E676; }
     .record-amount.expense { color: #FF3D71; }
     .record-amount.debt_my { color: #FF9F43; }
     .record-amount.debt_to_me { color: #00D2FF; }
 
-    .btn-delete {
-      background: none;
-      border: none;
-      color: #55555E;
-      font-size: 16px;
-      cursor: pointer;
-      padding: 4px;
-    }
+    .btn-delete { background: none; border: none; color: #636366; font-size: 16px; margin-left: 10px; cursor: pointer; }
 
-    .btn-delete:hover {
-      color: #FF3D71;
-    }
-
-    /* Bottom Navigation Bar */
     .bottom-nav {
-      height: 68px;
+      height: 60px;
       background: #18181C;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding-bottom: 4px;
     }
 
     .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
       cursor: pointer;
       color: #636366;
-      transition: all 0.2s;
-      width: 40%;
+      width: 45%;
     }
 
-    .nav-item .icon-wrap {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: all 0.2s;
-    }
+    .nav-item .icon { font-size: 20px; }
+    .nav-item span.nav-text { font-size: 11px; font-weight: 600; }
+    .nav-item.active { color: #00E676; }
 
-    .nav-item span.nav-text {
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .nav-item.active {
-      color: #00E676;
-    }
-
-    .nav-item.active .icon-wrap {
-      background: rgba(0, 230, 118, 0.12);
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 40px 10px;
-      color: #636366;
-      font-size: 14px;
-    }
+    .empty-state { text-align: center; padding: 30px; color: #636366; font-size: 13px; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <div class="header">
     <div class="header-title">
       <h1>Дафтари Бозор</h1>
@@ -397,16 +247,15 @@
     <div class="badge-avatar">TJ</div>
   </div>
 
-  <!-- Content -->
   <div class="content">
 
-    <!-- TAB 1: Add Entry -->
+    <!-- TAB 1: ADD -->
     <div id="tab-add" class="tab-content active">
       <div class="card">
         <label class="label">Маблағи амалиёт</label>
         <div class="amount-input-wrapper">
           <span class="currency-symbol">TJS</span>
-          <input type="number" id="input-amount" class="input-box amount-input" placeholder="0.00" step="any" inputmode="decimal">
+          <input type="number" id="input-amount" class="input-box amount-input" placeholder="0.00" inputmode="decimal">
         </div>
       </div>
 
@@ -418,50 +267,48 @@
       <div class="card">
         <label class="label">Намуди амалиёт</label>
         <div class="types-grid">
-          <div class="type-btn active" data-type="income" onclick="selectType(this)">
-            <span class="icon">➕</span>
+          <div class="type-btn active" data-type="income" id="btn-inc">
+            <span>➕</span>
             <span class="text">Даромад</span>
           </div>
-          <div class="type-btn" data-type="expense" onclick="selectType(this)">
-            <span class="icon">➖</span>
+          <div class="type-btn" data-type="expense" id="btn-exp">
+            <span>➖</span>
             <span class="text">Хароҷот</span>
           </div>
-          <div class="type-btn" data-type="debt_my" onclick="selectType(this)">
-            <span class="icon">⏳</span>
-            <span class="text">Қарз (БОЯД ДИҲАМ)</span>
+          <div class="type-btn" data-type="debt_my" id="btn-dmy">
+            <span>⏳</span>
+            <span class="text">Қарз (Ман)</span>
           </div>
-          <div class="type-btn" data-type="debt_to_me" onclick="selectType(this)">
-            <span class="icon">🔹</span>
-            <span class="text">Қарз (БОЯД ГИРАМ)</span>
+          <div class="type-btn" data-type="debt_to_me" id="btn-dtm">
+            <span>🔹</span>
+            <span class="text">Қарз (Ба ман)</span>
           </div>
         </div>
       </div>
 
-      <button class="btn-submit" onclick="saveRecord()">Қайд кардан</button>
+      <button class="btn-submit" id="btn-save">Қайд кардан</button>
     </div>
 
-    <!-- TAB 2: Protected Records -->
+    <!-- TAB 2: LIST -->
     <div id="tab-list" class="tab-content">
       
-      <!-- Lock Screen -->
       <div id="lock-screen" class="card lock-screen">
         <div class="lock-icon">🔒</div>
-        <h2>Саҳифаи ҳифзшуда</h2>
-        <p>Барои дидани рӯйхат паролро ворид кунед</p>
-        <input type="password" id="input-pass" class="input-box" placeholder="Паролро нависед..." style="text-align: center; margin-bottom: 12px;">
-        <button class="btn-submit" onclick="unlockList()" style="background: #00E676; color: #121214;">Кушодан</button>
+        <h2 style="font-size: 16px; margin-bottom: 4px;">Саҳифаи ҳифзшуда</h2>
+        <p style="font-size: 12px; color: #8E8E93; margin-bottom: 14px;">Паролро ворид кунед</p>
+        <input type="password" id="input-pass" class="input-box" placeholder="Парол..." style="text-align: center; margin-bottom: 10px;">
+        <button class="btn-submit" id="btn-unlock" style="background: #00E676; color: #121214;">Кушодан</button>
       </div>
 
-      <!-- Unlocked Records View -->
       <div id="unlocked-view" style="display: none;">
         <div class="balance-card">
-          <div class="balance-title">Баланси умумии пок</div>
+          <div class="balance-title">Баланси умумӣ</div>
           <div class="balance-amount" id="total-balance">0.00 TJS</div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <span class="label" style="margin: 0;">Рӯйхати амалиётҳо</span>
-          <button onclick="lockAgain()" style="background:none; border:none; color:#FF3D71; font-size:12px; font-weight:700; cursor:pointer;">Қуфл кардан 🔒</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span class="label" style="margin:0;">Рӯйхат</span>
+          <button id="btn-lock" style="background:none; border:none; color:#FF3D71; font-size:11px; font-weight:700; cursor:pointer;">Қуфл кардан 🔒</button>
         </div>
 
         <div id="records-container"></div>
@@ -471,171 +318,173 @@
 
   </div>
 
-  <!-- Bottom Navigation -->
   <div class="bottom-nav">
-    <div class="nav-item active" onclick="switchTab('add', this)">
-      <div class="icon-wrap">💰</div>
+    <div class="nav-item active" id="nav-add">
+      <div class="icon">💰</div>
       <span class="nav-text">Илова</span>
     </div>
-    <div class="nav-item" onclick="switchTab('list', this)">
-      <div class="icon-wrap">📋</div>
+    <div class="nav-item" id="nav-list">
+      <div class="icon">📋</div>
       <span class="nav-text">Рӯйхат</span>
     </div>
   </div>
 
   <script>
-    let selectedType = 'income';
-    let isUnlocked = false;
+    document.addEventListener('DOMContentLoaded', function() {
+      let selectedType = 'income';
+      let isUnlocked = false;
 
-    // Load saved records
-    function getRecords() {
-      return JSON.parse(localStorage.getItem('bozor_records') || '[]');
-    }
-
-    function saveRecordsToStorage(records) {
-      localStorage.setItem('bozor_records', JSON.stringify(records));
-    }
-
-    // Select Type
-    function selectType(element) {
-      document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
-      element.classList.add('active');
-      selectedType = element.getAttribute('data-type');
-    }
-
-    // Switch Tabs
-    function switchTab(tabName, el) {
-      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-
-      el.classList.add('active');
-      if(tabName === 'add') {
-        document.getElementById('tab-add').classList.add('active');
-      } else {
-        document.getElementById('tab-list').classList.add('active');
-        if(isUnlocked) {
-          renderRecords();
-        }
-      }
-    }
-
-    // Save Record
-    function saveRecord() {
-      const amountInput = document.getElementById('input-amount');
-      const descInput = document.getElementById('input-desc');
-
-      const amount = parseFloat(amountInput.value);
-      const desc = descInput.value.trim();
-
-      if (!amount || amount <= 0) {
-        alert('Лутфан маблағи дурустро ворид кунед!');
-        return;
-      }
-
-      const record = {
-        id: Date.now(),
-        amount: amount,
-        desc: desc || 'Болои бозор',
-        type: selectedType,
-        date: new Date().toLocaleString('tg-TJ', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
-      };
-
-      const records = getRecords();
-      records.unshift(record);
-      saveRecordsToStorage(records);
-
-      // Reset form
-      amountInput.value = '';
-      descInput.value = '';
-
-      alert('Амалиёт муваффақона қайд шуд! ✅');
-    }
-
-    // Unlock List
-    function unlockList() {
-      const passInput = document.getElementById('input-pass');
-      if (passInput.value === 'ВАЛИҶОН2010') {
-        isUnlocked = true;
-        document.getElementById('lock-screen').style.display = 'none';
-        document.getElementById('unlocked-view').style.display = 'block';
-        passInput.value = '';
-        renderRecords();
-      } else {
-        alert('Парол хато аст! ❌');
-      }
-    }
-
-    function lockAgain() {
-      isUnlocked = false;
-      document.getElementById('lock-screen').style.display = 'block';
-      document.getElementById('unlocked-view').style.display = 'none';
-    }
-
-    // Render Records & Calculate Balance
-    function renderRecords() {
-      const container = document.getElementById('records-container');
-      const records = getRecords();
-
-      if (records.length === 0) {
-        container.innerHTML = '<div class="empty-state">Ҳоло ҳеҷ амалиёт қайд нашудааст</div>';
-        document.getElementById('total-balance').innerText = '0.00 TJS';
-        return;
-      }
-
-      let total = 0;
-      let html = '';
-
-      records.forEach(rec => {
-        let sign = '+';
-        let className = rec.type;
-
-        if (rec.type === 'income' || rec.type === 'debt_to_me') {
-          total += rec.amount;
-          sign = '+';
-        } else {
-          total -= rec.amount;
-          sign = '-';
-        }
-
-        html += `
-          <div class="record-item">
-            <div class="record-info">
-              <div class="desc">${escapeHtml(rec.desc)}</div>
-              <div class="date">${rec.date}</div>
-            </div>
-            <div class="record-right">
-              <div class="record-amount ${className}">${sign} ${rec.amount.toFixed(2)} TJS</div>
-              <button class="btn-delete" onclick="deleteRecord(${rec.id})">✕</button>
-            </div>
-          </div>
-        `;
+      // Event Listeners for Types
+      const typeBtns = document.querySelectorAll('.type-btn');
+      typeBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          typeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedType = btn.getAttribute('data-type');
+        });
       });
 
-      container.innerHTML = html;
-      const balanceEl = document.getElementById('total-balance');
-      balanceEl.innerText = `${total.toFixed(2)} TJS`;
-      balanceEl.style.color = total >= 0 ? '#00E676' : '#FF3D71';
-    }
+      // Navigation
+      const navAdd = document.getElementById('nav-add');
+      const navList = document.getElementById('nav-list');
+      const tabAdd = document.getElementById('tab-add');
+      const tabList = document.getElementById('tab-list');
 
-    // Delete Record
-    function deleteRecord(id) {
-      if (confirm('Оё мехоҳед ин қайдро нест кунед?')) {
-        let records = getRecords();
-        records = records.filter(r => r.id !== id);
-        saveRecordsToStorage(records);
-        renderRecords();
+      navAdd.addEventListener('click', function() {
+        navAdd.classList.add('active');
+        navList.classList.remove('active');
+        tabAdd.classList.add('active');
+        tabList.classList.remove('active');
+      });
+
+      navList.addEventListener('click', function() {
+        navList.classList.add('active');
+        navAdd.classList.remove('active');
+        tabList.classList.add('active');
+        tabAdd.classList.remove('active');
+        if(isUnlocked) renderRecords();
+      });
+
+      // Storage
+      function getRecords() {
+        return JSON.parse(localStorage.getItem('bozor_db') || '[]');
       }
-    }
 
-    function escapeHtml(str) {
-      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-    }
-  
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => console.log('Service Worker Registered'));
-  }
-</script>
+      function saveRecords(data) {
+        localStorage.setItem('bozor_db', JSON.stringify(data));
+      }
+
+      // Save Action
+      document.getElementById('btn-save').addEventListener('click', function() {
+        const amountEl = document.getElementById('input-amount');
+        const descEl = document.getElementById('input-desc');
+
+        const amount = parseFloat(amountEl.value);
+        const desc = descEl.value.trim() || 'Амалиёт';
+
+        if (!amount || amount <= 0) {
+          alert('Лутфан маблағро ворид кунед!');
+          return;
+        }
+
+        const record = {
+          id: Date.now(),
+          amount: amount,
+          desc: desc,
+          type: selectedType,
+          date: new Date().toLocaleDateString('tg-TJ')
+        };
+
+        const records = getRecords();
+        records.unshift(record);
+        saveRecords(records);
+
+        amountEl.value = '';
+        descEl.value = '';
+        alert('Сабт шуд! ✅');
+      });
+
+      // Unlock
+      document.getElementById('btn-unlock').addEventListener('click', function() {
+        const pass = document.getElementById('input-pass').value;
+        if (pass === 'ВАЛИҶОН2010') {
+          isUnlocked = true;
+          document.getElementById('lock-screen').style.display = 'none';
+          document.getElementById('unlocked-view').style.display = 'block';
+          document.getElementById('input-pass').value = '';
+          renderRecords();
+        } else {
+          alert('Парол хато аст!');
+        }
+      });
+
+      // Lock
+      document.getElementById('btn-lock').addEventListener('click', function() {
+        isUnlocked = false;
+        document.getElementById('lock-screen').style.display = 'block';
+        document.getElementById('unlocked-view').style.display = 'none';
+      });
+
+      // Render
+      function renderRecords() {
+        const container = document.getElementById('records-container');
+        const records = getRecords();
+
+        if (records.length === 0) {
+          container.innerHTML = '<div class="empty-state">Рӯйхат холист</div>';
+          document.getElementById('total-balance').innerText = '0.00 TJS';
+          return;
+        }
+
+        let total = 0;
+        let html = '';
+
+        records.forEach(function(r) {
+          let sign = '+';
+          if (r.type === 'income' || r.type === 'debt_to_me') {
+            total += r.amount;
+            sign = '+';
+          } else {
+            total -= r.amount;
+            sign = '-';
+          }
+
+          html += `
+            <div class="record-item">
+              <div class="record-info">
+                <div class="desc">${r.desc}</div>
+                <div class="date">${r.date}</div>
+              </div>
+              <div style="display:flex; align-items:center;">
+                <div class="record-amount ${r.type}">${sign} ${r.amount.toFixed(2)} TJS</div>
+                <button class="btn-delete" data-id="${r.id}">✕</button>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+        const balEl = document.getElementById('total-balance');
+        balEl.innerText = total.toFixed(2) + ' TJS';
+        balEl.style.color = total >= 0 ? '#00E676' : '#FF3D71';
+
+        // Delete handlers
+        document.querySelectorAll('.btn-delete').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            const id = parseInt(btn.getAttribute('data-id'));
+            let recs = getRecords();
+            recs = recs.filter(item => item.id !== id);
+            saveRecords(recs);
+            renderRecords();
+          });
+        });
+      }
+
+      // Register SW for Offline
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(function(){});
+      }
+    });
+  </script>
 </body>
 </html>
