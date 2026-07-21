@@ -1,348 +1,631 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дафтари Бозор</title>
-    <style>
-        /* Заминаи торик ва танзимоти умумӣ */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121214;
-            margin: 0;
-            padding: 0;
-            color: #e1e1e6;
-            padding-bottom: 70px; /* Барои менюи поёнӣ ҷой мемонем */
-        }
-        h2, h3 {
-            text-align: center;
-            color: #00e676;
-            text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
-            margin-top: 15px;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-        .card {
-            background: #1e1e24;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            border: 1px solid #2d2d35;
-        }
-        
-        /* Рангҳои неонӣ */
-        .neon-green { color: #00e676 !important; text-shadow: 0 0 8px rgba(0, 230, 118, 0.4); }
-        .neon-red { color: #ff3d71 !important; text-shadow: 0 0 8px rgba(255, 61, 113, 0.4); }
-        .neon-orange { color: #ff9f43 !important; text-shadow: 0 0 8px rgba(255, 159, 67, 0.4); }
-        .neon-blue { color: #00d2ff !important; text-shadow: 0 0 8px rgba(0, 210, 255, 0.4); }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Дафтари Бозор</title>
+  <meta name="theme-color" content="#121214">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* Баланси умумӣ */
-        .balance-box {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #252529;
-            border-radius: 10px;
-            border: 1px solid #00e676;
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
-        }
+    body {
+      background-color: #121214;
+      color: #F3F4F6;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
 
-        /* Элементҳои форма */
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; color: #a4a4b5; font-size: 14px; }
-        input, select, button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
-            border: 1px solid #2d2d35;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-            background-color: #252529;
-            color: white;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #00e676;
-            box-shadow: 0 0 5px rgba(0, 230, 118, 0.3);
-        }
-        .main-btn {
-            background-color: #00e676;
-            color: #121214;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(0, 230, 118, 0.3);
-        }
+    /* Header */
+    .header {
+      padding: 20px 20px 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #121214;
+    }
 
-        /* Менюи поёнӣ (Нижняя навигация) */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #1e1e24;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #2d2d35;
-            z-index: 1000;
-        }
-        .nav-item {
-            background: none;
-            border: none;
-            color: #a4a4b5;
-            font-size: 24px;
-            cursor: pointer;
-            width: 50%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .nav-item.active {
-            color: #00e676;
-            border-bottom: 3px solid #00e676;
-        }
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
 
-        /* Саҳифаҳо */
-        .page { display: none; }
-        .page.active { display: block; }
+    .header-title p {
+      font-size: 12px;
+      color: #8E8E93;
+      margin-top: 2px;
+    }
 
-        /* Рӯйхат */
-        .history-list { list-style-type: none; padding: 0; margin-top: 15px; }
-        .history-item {
-            background: #252529;
-            padding: 12px;
-            border: 1px solid #2d2d35;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-        .item-info { display: flex; flex-direction: column; }
-        .item-desc { font-size: 16px; font-weight: bold; }
-        .item-date { font-size: 11px; color: #71717a; margin-top: 4px; }
-        .delete-btn {
-            background: none;
-            border: none;
-            color: #ff3d71;
-            cursor: pointer;
-            font-size: 18px;
-            width: auto;
-            padding: 0 5px;
-            margin: 0;
-        }
-    </style>
+    .badge-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2C2C2E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #8E8E93;
+      border: 1px solid #3A3A3C;
+    }
+
+    /* Main Container */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 20px 20px 20px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card Component */
+    .card {
+      background: #1E1E24;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #8E8E93;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* Inputs */
+    .input-box {
+      width: 100%;
+      background: #141418;
+      border: 1px solid #2C2C2E;
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: #FFFFFF;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .input-box:focus {
+      border-color: #00E676;
+      box-shadow: 0 0 10px rgba(0, 230, 118, 0.15);
+    }
+
+    .amount-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .currency-symbol {
+      position: absolute;
+      left: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #8E8E93;
+    }
+
+    .amount-input {
+      padding-left: 55px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    /* Types Grid */
+    .types-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .type-btn {
+      background: #141418;
+      border: 1.5px solid #2C2C2E;
+      border-radius: 14px;
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .type-btn span.icon {
+      font-size: 18px;
+    }
+
+    .type-btn span.text {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* Neon Accents for Types */
+    .type-btn[data-type="income"] span.text { color: #00E676; }
+    .type-btn[data-type="income"].active {
+      border-color: #00E676;
+      background: rgba(0, 230, 118, 0.08);
+      box-shadow: 0 0 14px rgba(0, 230, 118, 0.25);
+    }
+
+    .type-btn[data-type="expense"] span.text { color: #FF3D71; }
+    .type-btn[data-type="expense"].active {
+      border-color: #FF3D71;
+      background: rgba(255, 61, 113, 0.08);
+      box-shadow: 0 0 14px rgba(255, 61, 113, 0.25);
+    }
+
+    .type-btn[data-type="debt_my"] span.text { color: #FF9F43; }
+    .type-btn[data-type="debt_my"].active {
+      border-color: #FF9F43;
+      background: rgba(255, 159, 67, 0.08);
+      box-shadow: 0 0 14px rgba(255, 159, 67, 0.25);
+    }
+
+    .type-btn[data-type="debt_to_me"] span.text { color: #00D2FF; }
+    .type-btn[data-type="debt_to_me"].active {
+      border-color: #00D2FF;
+      background: rgba(0, 210, 255, 0.08);
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.25);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background: #FFFFFF;
+      color: #121214;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
+
+    /* Password Gate */
+    .lock-screen {
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .lock-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .lock-screen h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #FFFFFF;
+    }
+
+    .lock-screen p {
+      font-size: 13px;
+      color: #8E8E93;
+      margin-bottom: 20px;
+    }
+
+    /* Total Balance Box */
+    .balance-card {
+      background: linear-gradient(135deg, #1E1E24 0%, #2A2A32 100%);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .balance-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #8E8E93;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .balance-amount {
+      font-size: 30px;
+      font-weight: 800;
+      color: #00E676;
+      margin-top: 6px;
+    }
+
+    /* Records List */
+    .record-item {
+      background: #1E1E24;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .record-info .desc {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .record-info .date {
+      font-size: 11px;
+      color: #8E8E93;
+      margin-top: 3px;
+    }
+
+    .record-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .record-amount {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .record-amount.income { color: #00E676; }
+    .record-amount.expense { color: #FF3D71; }
+    .record-amount.debt_my { color: #FF9F43; }
+    .record-amount.debt_to_me { color: #00D2FF; }
+
+    .btn-delete {
+      background: none;
+      border: none;
+      color: #55555E;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .btn-delete:hover {
+      color: #FF3D71;
+    }
+
+    /* Bottom Navigation Bar */
+    .bottom-nav {
+      height: 68px;
+      background: #18181C;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: #636366;
+      transition: all 0.2s;
+      width: 40%;
+    }
+
+    .nav-item .icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+
+    .nav-item span.nav-text {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .nav-item.active {
+      color: #00E676;
+    }
+
+    .nav-item.active .icon-wrap {
+      background: rgba(0, 230, 118, 0.12);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 10px;
+      color: #636366;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    
-    <!-- САҲИФАИ 1: Танҳо илова кардан (💰) -->
-    <div id="page-add" class="page active">
-        <h2>Қайди Нав</h2>
-        <div class="card">
-            <div class="form-group">
-                <label for="amount">Маблағ (сомонӣ):</label>
-                <input type="number" id="amount" placeholder="Масалан: 150">
-            </div>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-title">
+      <h1>Дафтари Бозор</h1>
+      <p>Баҳисобгирии даромад ва хароҷот</p>
+    </div>
+    <div class="badge-avatar">TJ</div>
+  </div>
 
-            <div class="form-group">
-                <label for="description">Шарҳ (заметка):</label>
-                <input type="text" id="description" placeholder="Масалан: Бор фурӯхтам ё Қарзи Аҳмад">
-            </div>
+  <!-- Content -->
+  <div class="content">
 
-            <div class="form-group">
-                <label for="type">Навъи амалиёт:</label>
-                <select id="type">
-                    <option value="income">Даромад (+ Сабз)</option>
-                    <option value="expense">Хароҷот (- Сурх)</option>
-                    <option value="debt-to-give">Қарздор шудам (Бояд диҳам - Зард)</option>
-                    <option value="debt-to-take">Қарз доданд (Бояд гирам - Кӯк)</option>
-                </select>
-            </div>
-
-            <button class="main-btn" onclick="addTransaction()">Қайд кардан</button>
+    <!-- TAB 1: Add Entry -->
+    <div id="tab-add" class="tab-content active">
+      <div class="card">
+        <label class="label">Маблағи амалиёт</label>
+        <div class="amount-input-wrapper">
+          <span class="currency-symbol">TJS</span>
+          <input type="number" id="input-amount" class="input-box amount-input" placeholder="0.00" step="any" inputmode="decimal">
         </div>
+      </div>
+
+      <div class="card">
+        <label class="label">Тавсифи кӯтоҳ</label>
+        <input type="text" id="input-desc" class="input-box" placeholder="Масалан: Фурӯши мева...">
+      </div>
+
+      <div class="card">
+        <label class="label">Намуди амалиёт</label>
+        <div class="types-grid">
+          <div class="type-btn active" data-type="income" onclick="selectType(this)">
+            <span class="icon">➕</span>
+            <span class="text">Даромад</span>
+          </div>
+          <div class="type-btn" data-type="expense" onclick="selectType(this)">
+            <span class="icon">➖</span>
+            <span class="text">Хароҷот</span>
+          </div>
+          <div class="type-btn" data-type="debt_my" onclick="selectType(this)">
+            <span class="icon">⏳</span>
+            <span class="text">Қарз (БОЯД ДИҲАМ)</span>
+          </div>
+          <div class="type-btn" data-type="debt_to_me" onclick="selectType(this)">
+            <span class="icon">🔹</span>
+            <span class="text">Қарз (БОЯД ГИРАМ)</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="saveRecord()">Қайд кардан</button>
     </div>
 
-    <!-- САҲИФАИ 2: Парол ва Рӯйхат (📋) -->
-    <div id="page-list" class="page">
-        <!-- Блоки ворид кардани парол -->
-        <div id="pass-block" class="card">
-            <h2>Муҳофизат</h2>
-            <p style="text-align: center; color: #a4a4b5;">Барои дидани ҳисобҳо паролро занед:</p>
-            <div class="form-group">
-                <input type="password" id="pass-input" placeholder="Паролро нависед...">
-            </div>
-            <button class="main-btn" onclick="checkPassword()">Даромадан</button>
+    <!-- TAB 2: Protected Records -->
+    <div id="tab-list" class="tab-content">
+      
+      <!-- Lock Screen -->
+      <div id="lock-screen" class="card lock-screen">
+        <div class="lock-icon">🔒</div>
+        <h2>Саҳифаи ҳифзшуда</h2>
+        <p>Барои дидани рӯйхат паролро ворид кунед</p>
+        <input type="password" id="input-pass" class="input-box" placeholder="Паролро нависед..." style="text-align: center; margin-bottom: 12px;">
+        <button class="btn-submit" onclick="unlockList()" style="background: #00E676; color: #121214;">Кушодан</button>
+      </div>
+
+      <!-- Unlocked Records View -->
+      <div id="unlocked-view" style="display: none;">
+        <div class="balance-card">
+          <div class="balance-title">Баланси умумии пок</div>
+          <div class="balance-amount" id="total-balance">0.00 TJS</div>
         </div>
 
-        <!-- Блоки рӯйхат (пас аз пароли дуруст нишон дода мешавад) -->
-        <div id="content-block" style="display: none;">
-            <!-- Баланси умумӣ танҳо дар ин ҷост -->
-            <div class="balance-box">
-                Баланс: <span id="total-balance" class="neon-green">0</span> ТJS
-            </div>
-
-            <h3>Таърихи қайдҳо</h3>
-            <ul id="history-list" class="history-list"></ul>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span class="label" style="margin: 0;">Рӯйхати амалиётҳо</span>
+          <button onclick="lockAgain()" style="background:none; border:none; color:#FF3D71; font-size:12px; font-weight:700; cursor:pointer;">Қуфл кардан 🔒</button>
         </div>
+
+        <div id="records-container"></div>
+      </div>
+
     </div>
 
-</div>
+  </div>
 
-<!-- Менюи Поёнӣ -->
-<div class="bottom-nav">
-    <button id="btn-tab-add" class="nav-item active" onclick="switchTab('add')">💰</button>
-    <button id="btn-tab-list" class="nav-item" onclick="switchTab('list')">📋</button>
-</div>
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="switchTab('add', this)">
+      <div class="icon-wrap">💰</div>
+      <span class="nav-text">Илова</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('list', this)">
+      <div class="icon-wrap">📋</div>
+      <span class="nav-text">Рӯйхат</span>
+    </div>
+  </div>
 
-<script>
-    let transactions = JSON.parse(localStorage.getItem('market_transactions')) || [];
-    let isUnlocked = false; // Ҳолати парол
+  <script>
+    let selectedType = 'income';
+    let isUnlocked = false;
 
-    // Гузариш байни саҳифаҳо
-    function switchTab(tab) {
-        document.getElementById('page-add').classList.remove('active');
-        document.getElementById('page-list').classList.remove('active');
-        document.getElementById('btn-tab-add').classList.remove('active');
-        document.getElementById('btn-tab-list').classList.remove('active');
-
-        if (tab === 'add') {
-            document.getElementById('page-add').classList.add('active');
-            document.getElementById('btn-tab-add').classList.add('active');
-        } else if (tab === 'list') {
-            document.getElementById('page-list').classList.add('active');
-            document.getElementById('btn-tab-list').classList.add('active');
-        }
+    // Load saved records
+    function getRecords() {
+      return JSON.parse(localStorage.getItem('bozor_records') || '[]');
     }
 
-    // Санҷиши парол (ВАЛИҶОН2010)
-    function checkPassword() {
-        const input = document.getElementById('pass-input').value;
-        if (input === "ВАЛИҶОН2010") {
-            isUnlocked = true;
-            document.getElementById('pass-block').style.display = 'none';
-            document.getElementById('content-block').style.display = 'block';
-            document.getElementById('pass-input').value = '';
-            updateUI();
+    function saveRecordsToStorage(records) {
+      localStorage.setItem('bozor_records', JSON.stringify(records));
+    }
+
+    // Select Type
+    function selectType(element) {
+      document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+      selectedType = element.getAttribute('data-type');
+    }
+
+    // Switch Tabs
+    function switchTab(tabName, el) {
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+      el.classList.add('active');
+      if(tabName === 'add') {
+        document.getElementById('tab-add').classList.add('active');
+      } else {
+        document.getElementById('tab-list').classList.add('active');
+        if(isUnlocked) {
+          renderRecords();
+        }
+      }
+    }
+
+    // Save Record
+    function saveRecord() {
+      const amountInput = document.getElementById('input-amount');
+      const descInput = document.getElementById('input-desc');
+
+      const amount = parseFloat(amountInput.value);
+      const desc = descInput.value.trim();
+
+      if (!amount || amount <= 0) {
+        alert('Лутфан маблағи дурустро ворид кунед!');
+        return;
+      }
+
+      const record = {
+        id: Date.now(),
+        amount: amount,
+        desc: desc || 'Болои бозор',
+        type: selectedType,
+        date: new Date().toLocaleString('tg-TJ', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
+      };
+
+      const records = getRecords();
+      records.unshift(record);
+      saveRecordsToStorage(records);
+
+      // Reset form
+      amountInput.value = '';
+      descInput.value = '';
+
+      alert('Амалиёт муваффақона қайд шуд! ✅');
+    }
+
+    // Unlock List
+    function unlockList() {
+      const passInput = document.getElementById('input-pass');
+      if (passInput.value === 'ВАЛИҶОН2010') {
+        isUnlocked = true;
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('unlocked-view').style.display = 'block';
+        passInput.value = '';
+        renderRecords();
+      } else {
+        alert('Парол хато аст! ❌');
+      }
+    }
+
+    function lockAgain() {
+      isUnlocked = false;
+      document.getElementById('lock-screen').style.display = 'block';
+      document.getElementById('unlocked-view').style.display = 'none';
+    }
+
+    // Render Records & Calculate Balance
+    function renderRecords() {
+      const container = document.getElementById('records-container');
+      const records = getRecords();
+
+      if (records.length === 0) {
+        container.innerHTML = '<div class="empty-state">Ҳоло ҳеҷ амалиёт қайд нашудааст</div>';
+        document.getElementById('total-balance').innerText = '0.00 TJS';
+        return;
+      }
+
+      let total = 0;
+      let html = '';
+
+      records.forEach(rec => {
+        let sign = '+';
+        let className = rec.type;
+
+        if (rec.type === 'income' || rec.type === 'debt_to_me') {
+          total += rec.amount;
+          sign = '+';
         } else {
-            alert("Парол хато аст!");
-        }
-    }
-
-    // Илова кардани амалиёти нав (Саҳифаи 1)
-    function addTransaction() {
-        const amountInput = document.getElementById('amount');
-        const descInput = document.getElementById('description');
-        const typeInput = document.getElementById('type');
-
-        if (amountInput.value === '' || descInput.value === '') {
-            alert('Лутфан маблағ ва шарҳро нависед!');
-            return;
+          total -= rec.amount;
+          sign = '-';
         }
 
-        const now = new Date();
-        const dateStr = now.toLocaleDateString('tg-TJ') + ' ' + now.toLocaleTimeString('tg-TJ', {hour: '2-digit', minute:'2-digit'});
+        html += `
+          <div class="record-item">
+            <div class="record-info">
+              <div class="desc">${escapeHtml(rec.desc)}</div>
+              <div class="date">${rec.date}</div>
+            </div>
+            <div class="record-right">
+              <div class="record-amount ${className}">${sign} ${rec.amount.toFixed(2)} TJS</div>
+              <button class="btn-delete" onclick="deleteRecord(${rec.id})">✕</button>
+            </div>
+          </div>
+        `;
+      });
 
-        const newTransaction = {
-            amount: amountInput.value,
-            description: descInput.value,
-            type: typeInput.value,
-            date: dateStr
-        };
-
-        transactions.unshift(newTransaction);
-        localStorage.setItem('market_transactions', JSON.stringify(transactions));
-
-        amountInput.value = '';
-        descInput.value = '';
-
-        alert('Қайд шуд! 👍');
-        if (isUnlocked) updateUI();
+      container.innerHTML = html;
+      const balanceEl = document.getElementById('total-balance');
+      balanceEl.innerText = `${total.toFixed(2)} TJS`;
+      balanceEl.style.color = total >= 0 ? '#00E676' : '#FF3D71';
     }
 
-    // Навсозии рӯйхат ва баланс (Саҳифаи 2)
-    function updateUI() {
-        if (!isUnlocked) return;
-
-        const list = document.getElementById('history-list');
-        const balanceEl = document.getElementById('total-balance');
-        
-        list.innerHTML = '';
-        let total = 0;
-
-        transactions.forEach((item, index) => {
-            let colorClass = '';
-            let prefix = '';
-
-            if (item.type === 'income') {
-                colorClass = 'neon-green';
-                prefix = '+';
-                total += Number(item.amount);
-            } else if (item.type === 'expense') {
-                colorClass = 'neon-red';
-                prefix = '-';
-                total -= Number(item.amount);
-            } else if (item.type === 'debt-to-give') {
-                colorClass = 'neon-orange';
-                prefix = 'Қарздор: ';
-            } else if (item.type === 'debt-to-take') {
-                colorClass = 'neon-blue';
-                prefix = 'Гиранда: ';
-            }
-
-            const li = document.createElement('li');
-            li.className = 'history-item';
-            li.innerHTML = `
-                <div class="item-info">
-                    <span class="item-desc">${item.description}</span>
-                    <span class="item-date">${item.date}</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <span class="${colorClass}" style="font-weight: bold;">${prefix}${item.amount} с.</span>
-                    <button class="delete-btn" onclick="deleteTransaction(${index})">✕</button>
-                </div>
-            `;
-            list.appendChild(li);
-        });
-
-        balanceEl.innerText = total;
-        if (total >= 0) {
-            balanceEl.className = 'neon-green';
-        } else {
-            balanceEl.className = 'neon-red';
-        }
+    // Delete Record
+    function deleteRecord(id) {
+      if (confirm('Оё мехоҳед ин қайдро нест кунед?')) {
+        let records = getRecords();
+        records = records.filter(r => r.id !== id);
+        saveRecordsToStorage(records);
+        renderRecords();
+      }
     }
 
-    // Нест кардани қайд
-    function deleteTransaction(index) {
-        if (confirm("Ин қайдро нест мекунед?")) {
-            transactions.splice(index, 1);
-            localStorage.setItem('market_transactions', JSON.stringify(transactions));
-            updateUI();
-        }
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
-
-    // Регистратсияи Service Worker барои кори офлайн
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('Офлайн омода аст!'))
-                .catch(err => console.log('Хатогӣ:', err));
-        });
-    }
-</script>
-
+  </script>
 </body>
 </html>
